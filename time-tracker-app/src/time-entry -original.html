@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Manage Service Time Tracker</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="all,follow">
+    <!-- Bootstrap CSS-->
+    <link rel="stylesheet" href="assets/vendor/bootstrap/css/bootstrap.min.css">
+    <!-- Fontastic Custom icon font-->
+    <link rel="stylesheet" href="assets/css/fontastic.css">
+    <!-- Font Awesome CSS-->
+    <link rel="stylesheet" href="assets/vendor/font-awesome/css/font-awesome.min.css">
+    <!-- Google fonts - Poppins -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,700">
+    <!-- theme stylesheet-->
+    <link rel="stylesheet" href="assets/css/style.default.css" id="theme-stylesheet">
+    <!-- Custom stylesheet - for your changes-->
+    <link rel="stylesheet" href="assets/css/custom.css">
+    <!-- Favicon-->
+    <link rel="shortcut icon" href="favicon.png">
+    <!-- Tweaks for older IEs-->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
+</head>
+
+<body>
+    <div class="page form-page">
+        <!-- Main Navbar-->
+        <header class="header">
+            <nav class="navbar">
+                <!-- Search Box-->
+
+                <div class="container-fluid">
+                    <div class="navbar-holder d-flex align-items-center justify-content-between">
+                        <!-- Navbar Header-->
+                        <div class="navbar-header">
+                            <!-- Navbar Brand -->
+                            <a href="index.html" class="navbar-brand">
+                                <div class="brand-text brand-big"><span>Manage Service </span><strong> Time Tracker</strong>
+                                </div>
+                                <div class="brand-text brand-small"><strong>MSTT</strong>
+                                </div>
+                            </a>
+                            <!-- Toggle Button--><a id="toggle-btn" href="#" class="menu-btn active"><span></span><span></span><span></span></a>
+                        </div>
+                        <!-- Navbar Menu -->
+                        <ul class="nav-menu list-unstyled d-flex flex-md-row align-items-md-center">
+
+                            <!-- Notifications-->
+                            <li class="nav-item dropdown"> <a id="notifications" rel="nofollow" data-target="#" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link"><i class="fa fa-bell-o"></i><!-- <span class="badge bg-red">12</span> --></a>
+                                <!-- <ul aria-labelledby="notifications" class="dropdown-menu">
+                                    <li>
+                                        <a rel="nofollow" href="#" class="dropdown-item">
+                                            <div class="notification">
+                                                <div class="notification-content"><i class="fa fa-envelope bg-green"></i>You have 6 new messages </div>
+                                                <div class="notification-time"><small>4 minutes ago</small>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a rel="nofollow" href="#" class="dropdown-item">
+                                            <div class="notification">
+                                                <div class="notification-content"><i class="fa fa-twitter bg-blue"></i>You have 2 followers</div>
+                                                <div class="notification-time"><small>4 minutes ago</small>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a rel="nofollow" href="#" class="dropdown-item">
+                                            <div class="notification">
+                                                <div class="notification-content"><i class="fa fa-upload bg-orange"></i>Server Rebooted</div>
+                                                <div class="notification-time"><small>4 minutes ago</small>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a rel="nofollow" href="#" class="dropdown-item">
+                                            <div class="notification">
+                                                <div class="notification-content"><i class="fa fa-twitter bg-blue"></i>You have 2 followers</div>
+                                                <div class="notification-time"><small>10 minutes ago</small>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a rel="nofollow" href="#" class="dropdown-item all-notifications text-center"> <strong>view all notifications                                            </strong>
+                                        </a>
+                                    </li>
+                                </ul> -->
+                            </li>
+                            <!-- Messages                        -->
+                            <li class="nav-item dropdown"> <a id="messages" rel="nofollow" data-target="#" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link"><i class="fa fa-envelope-o"></i><!-- <span class="badge bg-orange">10</span> --></a>
+                                <!--  <ul aria-labelledby="notifications" class="dropdown-menu">
+                                    <li>
+                                        <a rel="nofollow" href="#" class="dropdown-item d-flex">
+                                            <div class="msg-profile"> <img src="assets/img/avatar-1.jpg" alt="..." class="img-fluid rounded-circle">
+                                            </div>
+                                            <div class="msg-body">
+                                                <h3 class="h5">Jason Doe</h3><span>Sent You Message</span>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a rel="nofollow" href="#" class="dropdown-item d-flex">
+                                            <div class="msg-profile"> <img src="assets/img/avatar-2.jpg" alt="..." class="img-fluid rounded-circle">
+                                            </div>
+                                            <div class="msg-body">
+                                                <h3 class="h5">Frank Williams</h3><span>Sent You Message</span>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a rel="nofollow" href="#" class="dropdown-item d-flex">
+                                            <div class="msg-profile"> <img src="assets/img/avatar-3.jpg" alt="..." class="img-fluid rounded-circle">
+                                            </div>
+                                            <div class="msg-body">
+                                                <h3 class="h5">Ashley Wood</h3><span>Sent You Message</span>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a rel="nofollow" href="#" class="dropdown-item all-notifications text-center"> <strong>Read all messages    </strong>
+                                        </a>
+                                    </li>
+                                </ul> -->
+                            </li>
+                            <!-- Logout    -->
+                            <li class="nav-item"><a href="login.html" class="nav-link logout">Logout<i class="fa fa-sign-out"></i></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </header>
+        <div class="page-content d-flex align-items-stretch">
+            <!-- Side Navbar -->
+            <nav class="side-navbar">
+                <!-- Sidebar Header-->
+                <div class="sidebar-header d-flex align-items-center">
+                    <div class="avatar"><img src="assets/img/avatar-1.jpg" alt="..." class="img-fluid rounded-circle">
+                    </div>
+                    <div class="title">
+                        <h1 class="h4">Mark Stephen</h1>
+                        <p>Engineer II </p>
+                    </div>
+                </div>
+                <!-- Sidebar Navidation Menus--><span class="heading">Main</span>
+                <ul class="list-unstyled">
+                    <li> <a href="dashboard.html"><i class="icon-home"></i>Home</a>
+                    </li>
+
+                    <li class="active">
+                        <a href="time-entry.html"> <i class="icon-padnote"></i>Forms</a>
+                    </li>
+
+                </ul><span class="heading">Extras</span>
+                <ul class="list-unstyled">
+                    <li>
+                        <a href="#"> <i class="icon-flask"></i>Time Report </a>
+                    </li>
+                    <li>
+                        <a href="#"> <i class="icon-screen"></i>Weekly Report </a>
+                    </li>
+
+                </ul>
+            </nav>
+            <div class="content-inner">
+                <!-- Page Header-->
+                <header class="page-header">
+                    <div class="container-fluid">
+                        <h2 class="no-margin-bottom">Time Entry</h2>
+                    </div>
+                </header>
+
+                <!-- Forms Section-->
+                <section class="forms">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <!-- Basic Form-->
+                            <div class="col-lg-12">
+                                <div class="card">
+                                    <div class="card-close">
+                                        <div class="dropdown">
+                                            <button type="button" id="closeCard1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-ellipsis-v"></i>
+                                            </button>
+                                            <div aria-labelledby="closeCard1" class="dropdown-menu dropdown-menu-right has-shadow">
+                                                <a href="#" class="dropdown-item remove"> <i class="fa fa-times"></i>Close</a>
+                                                <a href="#" class="dropdown-item edit"> <i class="fa fa-gear"></i>Edit</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card-header d-flex align-items-center">
+                                        <h3 class="h4">Task Form</h3>
+                                    </div>
+                                    <div class="card-body">
+
+                                        <form>
+                                            <div class="row">
+                                                <div class="col-6">
+                                                    <div class="form-group">
+                                                        <label class="form-control-label">Category</label>
+                                                        <div>
+                                                            <select name="account" class="form-control">
+                                                                <option>INCIDENTS</option>
+                                                                <option>SERVICE REQUESTS</option>
+                                                                <option>CHANGE REQUESTS</option>
+                                                                <option>WORK ORDERS</option>
+                                                                <option>KNOWLEDGE OBJECTS</option>
+                                                                <option>OTHER</option>
+                                                            </select>
+                                                        </div>
+                                                        <!-- <input type="email" placeholder="Email Address" class="form-control">-->
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="form-control-label">Type</label>
+                                                        <div>
+                                                            <select name="account" class="form-control">
+                                                                <option>Pier Support</option>
+                                                                <option>Order Fallout</option>
+                                                                <option>Fin Recon</option>
+                                                                <option>Bill Cycle</option>
+                                                                <option>API</option>
+                                                                <option>Script check</option>
+                                                                <option>Design Issue</option>
+                                                                <option>System Restart</option>
+                                                                <option>Defect test</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-6">
+                                                    <div class="form-group">
+                                                        <label class="form-control-label">Ticket ID</label>
+                                                        <input type="text" placeholder="Ticket ID" class="form-control">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="form-control-label">Hour</label>
+                                                        <input type="number" placeholder="Hour" step=".5" class="form-control" min="0">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row justify-content-md-center">
+                                                <div class="col-md-auto">
+                                                    <input type="submit" value="Add" class="btn btn-primary">
+                                                </div>
+                                                <div class="col-md-auto">
+                                                    <input type="submit" value="Clear" class="btn btn-secondary">
+                                                </div>
+
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Horizontal Form-->
+
+
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Projects Section-->
+                <section class="projects no-padding-top">
+                    <div class="row justify-content-md-center">
+                        <div class="col-12 col-md-9">
+                            <div class="container-fluid">
+                                <!-- Project-->
+                                <div class="project">
+                                    <div class="row bg-white has-shadow">
+                                        <div class="left-col col-lg-6 d-flex align-items-center justify-content-between">
+                                            <div class="project-title d-flex align-items-center">
+                                                <div class="image has-shadow"><img src="assets/img/project-1.jpg" alt="..." class="img-fluid">
+                                                </div>
+                                                <div class="text">
+                                                    <h3 class="h4">Project Title</h3><small>Lorem Ipsum Dolor</small>
+                                                </div>
+                                            </div>
+                                            <div class="project-date"><span class="hidden-sm-down">Today at 4:24 AM</span>
+                                            </div>
+                                        </div>
+                                        <div class="right-col col-lg-6 d-flex align-items-center">
+                                            <div class="time"><i class="fa fa-clock-o"></i>12:00 PM </div>
+                                            <div class="comments"><i class="fa fa-comment-o"></i>20</div>
+                                            <div class="project-progress">
+                                                <div class="progress">
+                                                    <div role="progressbar" style="width: 45%; height: 6px;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" class="progress-bar bg-red"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Project-->
+                                <div class="project">
+                                    <div class="row bg-white has-shadow">
+                                        <div class="left-col col-lg-6 d-flex align-items-center justify-content-between">
+                                            <div class="project-title d-flex align-items-center">
+                                                <div class="image has-shadow"><img src="assets/img/project-2.jpg" alt="..." class="img-fluid">
+                                                </div>
+                                                <div class="text">
+                                                    <h3 class="h4">Project Title</h3><small>Lorem Ipsum Dolor</small>
+                                                </div>
+                                            </div>
+                                            <div class="project-date"><span class="hidden-sm-down">Today at 4:24 AM</span>
+                                            </div>
+                                        </div>
+                                        <div class="right-col col-lg-6 d-flex align-items-center">
+                                            <div class="time"><i class="fa fa-clock-o"></i>12:00 PM </div>
+                                            <div class="comments"><i class="fa fa-comment-o"></i>20</div>
+                                            <div class="project-progress">
+                                                <div class="progress">
+                                                    <div role="progressbar" style="width: 60%; height: 6px;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" class="progress-bar bg-green"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Project-->
+                                <div class="project">
+                                    <div class="row bg-white has-shadow">
+                                        <div class="left-col col-lg-6 d-flex align-items-center justify-content-between">
+                                            <div class="project-title d-flex align-items-center">
+                                                <div class="image has-shadow"><img src="assets/img/project-3.jpg" alt="..." class="img-fluid">
+                                                </div>
+                                                <div class="text">
+                                                    <h3 class="h4">Project Title</h3><small>Lorem Ipsum Dolor</small>
+                                                </div>
+                                            </div>
+                                            <div class="project-date"><span class="hidden-sm-down">Today at 4:24 AM</span>
+                                            </div>
+                                        </div>
+                                        <div class="right-col col-lg-6 d-flex align-items-center">
+                                            <div class="time"><i class="fa fa-clock-o"></i>12:00 PM </div>
+                                            <div class="comments"><i class="fa fa-comment-o"></i>20</div>
+                                            <div class="project-progress">
+                                                <div class="progress">
+                                                    <div role="progressbar" style="width: 50%; height: 6px;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" class="progress-bar bg-violet"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Project-->
+                                <div class="project">
+                                    <div class="row bg-white has-shadow">
+                                        <div class="left-col col-lg-6 d-flex align-items-center justify-content-between">
+                                            <div class="project-title d-flex align-items-center">
+                                                <div class="image has-shadow"><img src="assets/img/project-4.jpg" alt="..." class="img-fluid">
+                                                </div>
+                                                <div class="text">
+                                                    <h3 class="h4">Project Title</h3><small>Lorem Ipsum Dolor</small>
+                                                </div>
+                                            </div>
+                                            <div class="project-date"><span class="hidden-sm-down">Today at 4:24 AM</span>
+                                            </div>
+                                        </div>
+                                        <div class="right-col col-lg-6 d-flex align-items-center">
+                                            <div class="time"><i class="fa fa-clock-o"></i>12:00 PM </div>
+                                            <div class="comments"><i class="fa fa-comment-o"></i>20</div>
+                                            <div class="project-progress">
+                                                <div class="progress">
+                                                    <div role="progressbar" style="width: 50%; height: 6px;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100" class="progress-bar bg-orange"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-lg-3">
+                            <div class="work-amount card">
+                                <div class="card-close">
+                                    <div class="dropdown">
+                                        <button type="button" id="closeCard1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-toggle"><i class="fa fa-ellipsis-v"></i>
+                                        </button>
+                                        <div aria-labelledby="closeCard1" class="dropdown-menu dropdown-menu-right has-shadow">
+                                            <a href="#" class="dropdown-item remove"> <i class="fa fa-times"></i>Close</a>
+                                            <a href="#" class="dropdown-item edit"> <i class="fa fa-gear"></i>Edit</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <h3>Work Hours</h3><small>Lorem ipsum dolor sit amet.</small>
+                                    <div class="chart text-center">
+                                        <div class="text"><strong>90</strong>
+                                            <br><span>Hours</span>
+                                        </div>
+                                        <canvas id="pieChart"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </section>
+
+
+            </div>
+        </div>
+    </div>
+    <!-- Javascript files-->
+    <script src="assets/vendor/jquery/jquery-3.2.1.min.js"></script>
+    <script src="assets/vendor/popper.js/umd/popper.min.js"></script>
+    <script src="assets/vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script src="assets/vendor/jquery.cookie/jquery.cookie.js"></script>
+    <script src="assets/vendor/jquery-validation/jquery.validate.min.js"></script>
+    <script src="assets/vendor/chart.js/Chart.min.js"></script>
+    <script src="assets/js/charts-home.js"></script>
+    <script src="assets/js/front.js"></script>
+</body>
+
+</html>

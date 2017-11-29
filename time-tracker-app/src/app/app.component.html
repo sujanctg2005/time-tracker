@@ -1,0 +1,194 @@
+
+
+<div class="page form-page"   [hidden]="loginUser!=1">
+        <!-- Main Navbar-->
+        <header class="header">
+            <nav class="navbar">
+                <!-- Search Box-->
+
+                <div class="container-fluid">
+                    <div class="navbar-holder d-flex align-items-center justify-content-between">
+                        <!-- Navbar Header-->
+                        <div class="navbar-header">
+                            <!-- Navbar Brand -->
+                            <a href="index.html" class="navbar-brand">
+                                <div class="brand-text brand-big"><span>Manage Service </span><strong> Time Tracker</strong>
+                                </div>
+                                <div class="brand-text brand-small"><strong>MSTT</strong>
+                                </div>
+                            </a>
+                            <!-- Toggle Button--><a id="toggle-btn" href="#" class="menu-btn active"><span></span><span></span><span></span></a>
+                        </div>
+                        <!-- Navbar Menu -->
+                        <ul class="nav-menu list-unstyled d-flex flex-md-row align-items-md-center">
+
+                            <!-- Notifications-->
+                            <li class="nav-item dropdown"> <a id="notifications" rel="nofollow" data-target="#" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link"><i class="fa fa-bell-o"></i><!-- <span class="badge bg-red">12</span> --></a>
+                                <!-- <ul aria-labelledby="notifications" class="dropdown-menu">
+                                    <li>
+                                        <a rel="nofollow" href="#" class="dropdown-item">
+                                            <div class="notification">
+                                                <div class="notification-content"><i class="fa fa-envelope bg-green"></i>You have 6 new messages </div>
+                                                <div class="notification-time"><small>4 minutes ago</small>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a rel="nofollow" href="#" class="dropdown-item">
+                                            <div class="notification">
+                                                <div class="notification-content"><i class="fa fa-twitter bg-blue"></i>You have 2 followers</div>
+                                                <div class="notification-time"><small>4 minutes ago</small>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a rel="nofollow" href="#" class="dropdown-item">
+                                            <div class="notification">
+                                                <div class="notification-content"><i class="fa fa-upload bg-orange"></i>Server Rebooted</div>
+                                                <div class="notification-time"><small>4 minutes ago</small>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a rel="nofollow" href="#" class="dropdown-item">
+                                            <div class="notification">
+                                                <div class="notification-content"><i class="fa fa-twitter bg-blue"></i>You have 2 followers</div>
+                                                <div class="notification-time"><small>10 minutes ago</small>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a rel="nofollow" href="#" class="dropdown-item all-notifications text-center"> <strong>view all notifications                                            </strong>
+                                        </a>
+                                    </li>
+                                </ul> -->
+                            </li>
+                            <!-- Messages                        -->
+                            <li class="nav-item dropdown"> <a id="messages" rel="nofollow" data-target="#" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="nav-link"><i class="fa fa-envelope-o"></i><!-- <span class="badge bg-orange">10</span> --></a>
+                                <!--  <ul aria-labelledby="notifications" class="dropdown-menu">
+                                    <li>
+                                        <a rel="nofollow" href="#" class="dropdown-item d-flex">
+                                            <div class="msg-profile"> <img src="assets/img/avatar-1.jpg" alt="..." class="img-fluid rounded-circle">
+                                            </div>
+                                            <div class="msg-body">
+                                                <h3 class="h5">Jason Doe</h3><span>Sent You Message</span>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a rel="nofollow" href="#" class="dropdown-item d-flex">
+                                            <div class="msg-profile"> <img src="assets/img/avatar-2.jpg" alt="..." class="img-fluid rounded-circle">
+                                            </div>
+                                            <div class="msg-body">
+                                                <h3 class="h5">Frank Williams</h3><span>Sent You Message</span>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a rel="nofollow" href="#" class="dropdown-item d-flex">
+                                            <div class="msg-profile"> <img src="assets/img/avatar-3.jpg" alt="..." class="img-fluid rounded-circle">
+                                            </div>
+                                            <div class="msg-body">
+                                                <h3 class="h5">Ashley Wood</h3><span>Sent You Message</span>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a rel="nofollow" href="#" class="dropdown-item all-notifications text-center"> <strong>Read all messages    </strong>
+                                        </a>
+                                    </li>
+                                </ul> -->
+                            </li>
+                            <!-- Logout    -->
+                            <li class="nav-item"><a class="nav-link logout" style="cursor:pointer;" (click)="logout()">Logout<i class="fa fa-sign-out"></i></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </header>
+        <div class="page-content d-flex align-items-stretch" >
+            <!-- Side Navbar -->
+            <nav class="side-navbar">
+                <!-- Sidebar Header-->
+                <div class="sidebar-header d-flex align-items-center">
+                    <div class="avatar"><img src="/timetracker/assets/img/xs.png"  [attr.src]="appContext+'assets/img/xs.png'"  alt="..." class="img-fluid rounded-circle">
+                    </div>
+                    <div class="title">
+                        <h1 class="h4">{{userName}}</h1>
+                        <p> </p>
+                    </div>
+                </div>
+                <!-- Sidebar Navidation Menus--><span class="heading">Main</span>
+                <ul class="list-unstyled">
+                    <li> <a [routerLink]="['/timeEntry']"><i class="icon-home"></i>Home</a>
+                    </li>
+
+                    <li class="active">
+                        <a [routerLink]="['/timeEntry']"> <i class="icon-padnote"></i>Forms</a>
+                    </li>
+
+                </ul><span class="heading">Extras</span>
+                <ul class="list-unstyled">
+                    <li>
+                        <a [routerLink]="['/timeEntry']"> <i class="icon-flask"></i>Time Report </a>
+                    </li>
+                    <li>
+                        <a [routerLink]="['/timeEntry']"> <i class="icon-screen"></i>Weekly Report </a>
+                    </li>
+
+                </ul>
+            </nav>
+             <router-outlet></router-outlet>
+        </div>
+       
+    </div>
+
+
+    <!-- Login form -->
+
+  <div class="page login-page"   [hidden]="loginUser!=0">
+      <div class="container d-flex align-items-center">
+        <div class="form-holder has-shadow">
+          <div class="row">
+            <!-- Logo & Information Panel-->
+            <div class="col-lg-6">
+              <div class="info d-flex align-items-center">
+                <div class="content">
+                  <div class="logo">
+                    <h1>Time Tracker</h1>
+                  </div>
+                  <p>{{projectTitle}}</p>
+                </div>
+              </div>
+            </div>
+            <!-- Form Panel    -->
+            <div class="col-lg-6 bg-white">
+              <div class="form d-flex align-items-center">
+                <div class="content">
+                  <form id="login-form" method="post">
+                    <div class="form-group">
+                      <input id="login-username" type="text" name="loginUsername" required="" class="input-material"   [(ngModel)]="userName"  autocomplete="off">
+                      <label for="login-username" class="label-material">User Name</label>
+                    </div>
+                    <div class="form-group">
+                      <input id="login-password" type="password" name="loginPassword" required="" class="input-material"  [(ngModel)]="password" autocomplete="off">
+                      <label for="login-password" class="label-material">Password</label>
+                    </div>
+                  <input type="submit" id="login" value="login"  name="Login" class="btn btn-primary"   (click)="onClickAdd()">
+                    <!-- <a id="login" href="dashboard.html" class="btn btn-primary">Login</a> -->
+                    <!-- This should be submit button but I replaced it with <a> for demo purposes-->
+                  </form><a href="#" class="forgot-pass">Forgot Password?</a><br><small>Do not have an account? </small><a href="register.html" class="signup">Signup</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="copyrights text-center">
+        </div>
+    </div>
