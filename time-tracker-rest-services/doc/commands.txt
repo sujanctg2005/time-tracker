@@ -1,4 +1,4 @@
-# run service project
+﻿# run service project
 java -jar ./target/time-tracker-rest-services-0.0.1-SNAPSHOT.jar --spring.config.location=classpath:file:./app.properties
 # build project for prod
 ng build --prod --build-optimizer --base-href=timetracker
@@ -10,3 +10,8 @@ netsh interface portproxy add v4tov4 listenport=8080 listenaddress=10.253.49.163
 
 
 netsh advfirewall firewall add rule name=”RDP_8080” protocol=TCP dir=in localip=10.253.49.163  localport=8080 action=allow
+
+
+
+#build
+ng build --prod --build-optimizer

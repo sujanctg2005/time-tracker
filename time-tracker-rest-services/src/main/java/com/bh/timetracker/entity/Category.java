@@ -27,6 +27,11 @@ public class Category implements Serializable {
 	private String ticketVerificationInfo;
 	
 	
+	@Column(name="TICKET_PATTERN")
+	private String ticketPattern;
+	
+	
+	
 	@Temporal(TemporalType.DATE)
 	@Column(name="CREATE_DATE")
 	private Date createDate;
@@ -73,6 +78,14 @@ public class Category implements Serializable {
 
 	public void setCreateDate(Date createDate) {
 		this.createDate = createDate;
+	}
+
+	public String getTicketPattern() {
+		return ticketPattern;
+	}
+
+	public void setTicketPattern(String ticketPattern) {
+		this.ticketPattern = ticketPattern;
 	}
 
 	public Date getUpdateDate() {

@@ -46,8 +46,9 @@ export class TimeEntryComponent implements OnInit {
   assignedGroup:string;
    showError:boolean=false;
    showSuccess:boolean=false;
-   alertMessage:string=""
-   autoSuggestionID = ["CRQ000000019805",
+   alertMessage:string="";
+   ticketIDPlaceHolder:string="Ticket ID";
+   /*autoSuggestionID = ["CRQ000000019805",
                         "CRQ000000019850",
                         "CRQ000000019915",
                         "CRQ000000020002",
@@ -63,7 +64,7 @@ export class TimeEntryComponent implements OnInit {
                         "CRQ000000020103",
                         "CRQ000000020107",
                         ];
-
+*/
   constructor(private timeTrackerService: TimeTrackerService,private messageService: MessageService) {
      this.subscription = this.messageService.getMessage().subscribe(message => { this.ngOnInit(); });
    }
@@ -74,6 +75,21 @@ export class TimeEntryComponent implements OnInit {
        this.comments="";
        this.taskDate=this.getTodayDate();
        this.formMode=FormMode.NEW;
+       if(this.categoryList!=null){
+          this.selectedCategory=this.categoryList[0];
+       }
+      if(this.taskTypeList!=null){
+          this.selectedTaskType=this.taskTypeList[0];
+       }
+       if(this.mediumList!=null){
+          this.selectedMedium=this.mediumList[0];
+       }
+       if(this.subtypeList!=null){
+          this.selectedSubtype=this.subtypeList[0];
+       }
+       
+      
+      
  
   }
 
@@ -238,7 +254,13 @@ showErrorAlert(error:string){
              if(this.selectedCategory.ticketVerificationInfo!=null){
                   this.validTicket=false;
              }
-              
+             if(this.selectedCategory.ticketPattern!=null && this.selectedCategory.ticketPattern!=""){
+                this.ticketIDPlaceHolder="Ticket ID e.g: "+this.selectedCategory.ticketPattern;
+             }else{
+                this.ticketIDPlaceHolder="Ticket ID";
+             }
+             
+             
              this.incidentId="";
             break;
           }
@@ -395,8 +417,9 @@ showErrorAlert(error:string){
           this.timeTrackerService.deleteTask(task).subscribe(
           result => { 
                 if( result.error==null){
-                   console.log("Task delete successfully");
+                   console.log("Task deleted successfully");
                     this.reloadTaskList();
+                    this.showValidAlert("Task deleted successfully");
                  }else{
                      this.showTaskListProgressBar=false;
                      this.showDeleteFailAlert();

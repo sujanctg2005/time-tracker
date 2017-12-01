@@ -7,3 +7,6 @@ npm install --save ng2-auto-complete
 ng serve --open
 #install latest
  npm install -g @angular/cli@latest
+
+#build
+ng build --prod --build-optimizer

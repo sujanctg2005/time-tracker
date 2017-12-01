@@ -53,7 +53,7 @@
                                                         </div>                                                     
                                                     </div>
                                                     <div class="form-group">
-                                                        <label class="form-control-label">Technical Category<span style="color:red">*</span></label>
+                                                        <label class="form-control-label">Category<span style="color:red">*</span></label>
                                                         <div>
                                                           <select name="taskTypeList" class="form-control" (input)="onSelecttaskTypeList($event.target.value)"  [(ngModel)]="selectedTaskType.taskTypeId">
                                                                 
@@ -65,7 +65,7 @@
                                                    
 
                                                      <div class="form-group">
-                                                        <label class="form-control-label">Sub Technical Category<span style="color:red">*</span></label>
+                                                        <label class="form-control-label">Sub Category<span style="color:red">*</span></label>
                                                         <div>
                                                           <select name="subtypeList1" class="form-control"   [(ngModel)]="selectedSubtype.subtypeId"   (input)="onSelectSubtypeList($event.target.value)">
                                                                 <option *ngFor="let subtype of subtypeList" [value]="subtype.subtypeId">{{subtype.subtypeName}}</option>
@@ -89,7 +89,7 @@
 
                                                     <div class="form-group">
                                                         <label class="form-control-label">Ticket ID</label>
-                                                        <input type="text" placeholder="Ticket ID" required class="form-control" onInput="checkLength(40,this)"  (blur)="validateTicket()" name="incidentId" [(ngModel)]="incidentId" autocomplete="off"   ng2-auto-complete  [source]="autoSuggestionID">
+                                                        <input type="text"   [attr.placeholder]="ticketIDPlaceHolder"    required class="form-control" onInput="checkLength(40,this)"  (blur)="validateTicket()" name="incidentId" [(ngModel)]="incidentId" autocomplete="off"     > <!-- ng2-auto-complete [source]="autoSuggestionID" -->
                                                     </div>
                                                     <div class="form-group">
                                                         <label class="form-control-label">Activity Duration/Time (Mins)<span style="color:red">*</span></label>
