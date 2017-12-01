@@ -34,6 +34,7 @@ export class TimeTrackerService {
   private allTasksByUserV1Url = `${this.apiHOST}/timeEntry/allTasksByUserV1`; 
   private deleteTaskUrl = `${this.apiHOST}/timeEntry/deleteTask`; 
   private  loginUrl = `${this.apiHOST}/auth/login`; 
+  private validateTicketUrl = `${this.apiHOST}/ticket/validateTicket`; 
   //http://localhost:8080/ticket/validateTicket/TICKET,INCIDENT_ID,ASSIGNED_GROUP/CRQ000000019915
   constructor(
     private http: HttpClient) { 
@@ -59,6 +60,21 @@ export class TimeTrackerService {
           this.log(`login: ${loginUser.username} `);
         }),
         catchError(this.handleError<Payload<Void>>(`getCategoryList`))
+      );
+  }
+
+ /** GET validateTicket from the server */
+  validateTicket<Data>( tableinfo:string,
+       ticketId:string): Observable<string[]> {
+    const url = `${this.validateTicketUrl}/${tableinfo}/${ticketId}`;
+    return this.http.get<Payload<string[]>>(url)
+      .pipe(
+        map(payload => payload.data),
+        tap(h => {
+          const outcome = h ? `fetched` : `did not find`;
+          this.log(`${outcome} `);
+        }),
+        catchError(this.handleError<string[]>(`validateTicket`))
       );
   }
 

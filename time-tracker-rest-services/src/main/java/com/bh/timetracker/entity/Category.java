@@ -23,7 +23,10 @@ public class Category implements Serializable {
 
 	@Column(name="CATEGORY_NAME")
 	private String categoryName;
-
+	@Column(name="TICKET_VERIFICATION_INFO")
+	private String ticketVerificationInfo;
+	
+	
 	@Temporal(TemporalType.DATE)
 	@Column(name="CREATE_DATE")
 	private Date createDate;
@@ -45,6 +48,15 @@ public class Category implements Serializable {
 
 	public void setCategoryId(long categoryId) {
 		this.categoryId = categoryId;
+	}
+
+	
+	public String getTicketVerificationInfo() {
+		return ticketVerificationInfo;
+	}
+
+	public void setTicketVerificationInfo(String ticketVerificationInfo) {
+		this.ticketVerificationInfo = ticketVerificationInfo;
 	}
 
 	public String getCategoryName() {

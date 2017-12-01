@@ -42,7 +42,11 @@ export class TimeEntryComponent implements OnInit {
   showTaskListProgressBar:boolean=false;
   appContext=env.appContext;
   subscription: Subscription;
-
+  validTicket:boolean=true;
+  assignedGroup:string;
+   showError:boolean=false;
+   showSuccess:boolean=false;
+   alertMessage:string=""
    autoSuggestionID = ["CRQ000000019805",
                         "CRQ000000019850",
                         "CRQ000000019915",
@@ -180,6 +184,48 @@ export class TimeEntryComponent implements OnInit {
      
 
   }
+
+showErrorAlert(error:string){
+        this.showError = true; 
+        this.alertMessage= error;       
+        setTimeout(function() {
+          this.dismissAlert();
+       }.bind(this), 5000);
+     }
+ showValidAlert(error:string){
+        this.showSuccess = true; 
+        this.alertMessage= error;       
+        setTimeout(function() {
+          this.dismissAlert();
+       }.bind(this), 5000);
+     }  
+
+   validateTicket(){
+        this.validTicket=true;
+       if( (this.selectedCategory.ticketVerificationInfo!=undefined   || this.selectedCategory.ticketVerificationInfo!=null ) && this.selectedCategory.ticketVerificationInfo!=""){                 
+             if(this.incidentId!=null &&  this.incidentId.trim() !=""){
+
+               this.timeTrackerService.validateTicket(this.selectedCategory.ticketVerificationInfo,this.incidentId ).subscribe(
+                  result => { 
+                     if(result==null || result.length==0 || result[0]==null){
+                        this.validTicket=false;
+                         console.log("invalid ticket");
+                         this.showErrorAlert("invalid ticket");
+                     }else{
+                        this.validTicket=true;     
+                        this.assignedGroup=  result[1];    
+                        console.log("valid ticket: "+ this.assignedGroup);    
+                        this.showValidAlert("Valid Ticket");
+                     }
+                  },
+                   err => console.log("Error: " + err),
+                   () => console.log("DONE")
+                );  
+             }
+
+               
+        }
+   }
    onChangeTaskDate(){
        this.getTaskListByUser(this.taskDate);
    }
@@ -189,6 +235,11 @@ export class TimeEntryComponent implements OnInit {
         {
           if (this.categoryList[i].categoryId ==categoryId) {
             this.selectedCategory = this.categoryList[i];
+             if(this.selectedCategory.ticketVerificationInfo!=null){
+                  this.validTicket=false;
+             }
+              
+             this.incidentId="";
             break;
           }
         }
@@ -247,6 +298,9 @@ export class TimeEntryComponent implements OnInit {
         this.saveFail = false;
         this.deleteFail = false;
         this.inCompleteForm=false;
+        this.showError=false;
+        this.alertMessage="";
+        this.showSuccess=false;
      }
   
      showSuccessAlert(){
@@ -283,8 +337,11 @@ export class TimeEntryComponent implements OnInit {
      }
      onClickAdd() { 
        let task:Task=this.getTask();
-
-       if(task.medium.mediumId===-1 || task.category.categoryId===-1 || task.subtype.subtypeId===-1 || task.medium.mediumId===-1){
+       if(!this.validTicket){
+          this.showErrorAlert("invalid ticket");
+          return;
+       }
+       if(task.medium.mediumId==-1 || task.category.categoryId==-1 || task.subtype.subtypeId==-1 || task.taskType.taskTypeId==-1){
           //alert("Fill the form");
            this.showIncompleteFormAlert();
           return;
@@ -376,6 +433,7 @@ export class TimeEntryComponent implements OnInit {
             let task:Task = new Task();
             let ticket:Ticket= new Ticket();      
             ticket.incidentId=this.incidentId;
+            ticket.assignedGroup= this.assignedGroup;
             task.taskId=this.taskId;
             task.comments=this.comments;
             task.category=this.selectedCategory;
