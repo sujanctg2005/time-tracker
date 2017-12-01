@@ -11,15 +11,15 @@ import java.util.List;
  * 
  */
 @Entity
-@NamedQuery(name="Tiket.findAll", query="SELECT t FROM Tiket t")
-public class Tiket implements Serializable {
+@NamedQuery(name="Ticket.findAll", query="SELECT t FROM Ticket t")
+public class Ticket implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@SequenceGenerator(name="TIKET_TIKETID_GENERATOR", sequenceName="TIKET_TIKET_ID_SEQ")
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="TIKET_TIKETID_GENERATOR")
-	@Column(name="TIKET_ID")
-	private long tiketId;
+	@Column(name="TICKET_ID")
+	private long ticketId;
 
 	@Column(name="ASSIGNED_GROUP")
 	private String assignedGroup;
@@ -42,18 +42,18 @@ public class Tiket implements Serializable {
 	private Date updateDate = new Date();
 
 	//bi-directional many-to-one association to Task
-	@OneToMany(mappedBy="tiket")
+	@OneToMany(mappedBy="ticket")
 	private List<Task> tasks;
 
-	public Tiket() {
+	public Ticket() {
 	}
 
 	public long getTiketId() {
-		return this.tiketId;
+		return this.ticketId;
 	}
 
 	public void setTiketId(long tiketId) {
-		this.tiketId = tiketId;
+		this.ticketId = tiketId;
 	}
 
 	public String getAssignedGroup() {
@@ -128,7 +128,7 @@ public class Tiket implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Tiket [tiketId=" + tiketId + ", assignedGroup=" + assignedGroup + ", categoryName=" + categoryName
+		return "Tiket [tiketId=" + ticketId + ", assignedGroup=" + assignedGroup + ", categoryName=" + categoryName
 				+ ", createDate=" + createDate + ", incidentId=" + incidentId + ", tiketDescription=" + tiketDescription
 				+ ", updateDate=" + updateDate + ", tasks=" + tasks + "]";
 	}

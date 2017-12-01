@@ -69,7 +69,10 @@ public class TaskDaoImpl {
 		for (Task t : list) {
 			// lazy data load
 			t.getCategory().getCategoryName();
-			t.getTiket().getTiketDescription();
+			if(t.getTiket()!=null) {
+				t.getTiket().getTiketDescription();
+			}
+			
 			t.getUser().getDesignation();
 			t.getUser().setPassword(null);
 			t.getTaskType().getTaskTypeName();
@@ -81,7 +84,7 @@ public class TaskDaoImpl {
 	@Transactional(propagation = Propagation.REQUIRED, readOnly=true)
 	public List<Task> getTaskListV1(User user,Date date) {
 		logger.info("executing the query to load all task for user " + user.getName());
-		String sql = "SELECT t FROM Task t JOIN FETCH t.category c JOIN FETCH t.taskType tp  JOIN FETCH  t.tiket tk "
+		String sql = "SELECT t FROM Task t JOIN FETCH t.category c JOIN FETCH t.taskType tp  LEFT JOIN  FETCH  t.ticket tk "
 				+ " JOIN FETCH t.user u JOIN FETCH t.medium m "
 				+ " WHERE  t.user.username=:username "
 				+ " and t.taskDate=:taskDate order by t.taskId desc";

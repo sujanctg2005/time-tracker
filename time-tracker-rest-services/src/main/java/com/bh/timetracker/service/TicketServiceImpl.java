@@ -4,7 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import com.bh.timetracker.entity.Tiket;
+import com.bh.timetracker.entity.Ticket;
 
 import com.bh.timetracker.dao.TicketDaoImpl;
 
@@ -15,9 +15,9 @@ public class TicketServiceImpl {
 	private TicketDaoImpl ticketDao;
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-	public Tiket getTicketOrAdd(Tiket ticket) {
+	public Ticket getTicketOrAdd(Ticket ticket) {
 		logger.info("getting  ticket info   from  dao");
-		Tiket t = null;
+		Ticket t = null;
 		t = ticketDao.getTicker(ticket);
 		if (t == null) {
 			t = ticketDao.save(ticket);

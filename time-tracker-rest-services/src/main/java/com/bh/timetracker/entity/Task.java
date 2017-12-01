@@ -61,8 +61,8 @@ public class Task implements Serializable {
 
 	// bi-directional many-to-one association to Tiket
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "TIKET_ID")
-	private Tiket tiket;
+	@JoinColumn(name = "TICKET_ID")
+	private Ticket ticket;
 
 	// bi-directional many-to-one association to User
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -148,12 +148,12 @@ public class Task implements Serializable {
 		this.taskType = taskType;
 	}
 
-	public Tiket getTiket() {
-		return this.tiket;
+	public Ticket getTiket() {
+		return this.ticket;
 	}
 
-	public void setTiket(Tiket tiket) {
-		this.tiket = tiket;
+	public void setTiket(Ticket tiket) {
+		this.ticket = tiket;
 	}
 
 	public User getUser() {
@@ -183,7 +183,7 @@ public class Task implements Serializable {
 	public String toString() {
 		return "Task [taskId=" + taskId + ", comments=" + comments + ", createDate=" + createDate + ", hours=" + hours
 				+ ", taskDate=" + taskDate + ", updateDate=" + updateDate + ", category=" + category + ", taskType="
-				+ taskType + ", tiket=" + tiket + ", user=" + user + "]";
+				+ taskType + ", tiket=" + ticket + ", user=" + user + "]";
 	}
 
 }

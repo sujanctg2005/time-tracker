@@ -31,11 +31,46 @@
         <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
         <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
 </head>
+<script >
+    function check(e,value){
+    //Check Charater
+        var unicode=e.charCode? e.charCode : e.keyCode;
+        if (value.indexOf(".") != -1)if( unicode == 46 )return false;
+        if (unicode!=8)if((unicode<48||unicode>57)&&unicode!=46)return false;
+    }
+    function checkLength(len,ele){
+    var fieldLength = ele.value.length;
+    if(fieldLength <= len){
+        return true;
+    }
+    else
+    {
+        var str = ele.value;
+        str = str.substring(0, str.length - 1);
+    ele.value = str;
+    }
+    }
 
+
+
+</script>
 <body>
+   <script type="text/javascript">
+       
+     var isIE = !!navigator.userAgent.match(/Trident/g) || !!navigator.userAgent.match(/MSIE/g);
+
+            if(isIE){
+                //document.("IE"); 
+              var oP = document.body.getElementsByTagName("app-root")[0];
+               document.body.removeChild(oP);
+            }
+            else{
+               //alert("Not IE");   
+            }
+
+   </script>
    
-   
-    <app-root></app-root>
+    <app-root>Loading.....</app-root>
     <!-- Javascript files-->
     <script src="/assets/vendor/jquery/jquery-3.2.1.min.js"></script>
     <script src="/assets/vendor/popper.js/umd/popper.min.js"></script>
@@ -46,5 +81,6 @@
     <script src="/assets/js/charts-home.js"></script>
     <script src="/assets/js/front.js"></script>
 </body>
+
 
 </html>

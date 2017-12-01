@@ -1,6 +1,6 @@
 
 
-<div class="page form-page"   [hidden]="loginUser!=1">
+<div class="page form-page"    [style.display]="(loginUser && ! isIE )?'block':'none'" >
         <!-- Main Navbar-->
         <header class="header">
             <nav class="navbar">
@@ -129,7 +129,7 @@
                     </li>
 
                     <li class="active">
-                        <a [routerLink]="['/timeEntry']"> <i class="icon-padnote"></i>Forms</a>
+                        <a [routerLink]="['/timeEntry']"> <i class="icon-padnote"></i>Time Entry</a>
                     </li>
 
                 </ul><span class="heading">Extras</span>
@@ -151,7 +151,7 @@
 
     <!-- Login form -->
 
-  <div class="page login-page"   [hidden]="loginUser!=0">
+  <div class="page login-page"   [style.display]="(! loginUser && ! isIE )?'block':'none'" >
       <div class="container d-flex align-items-center">
         <div class="form-holder has-shadow">
           <div class="row">
@@ -171,6 +171,18 @@
               <div class="form d-flex align-items-center">
                 <div class="content">
                   <form id="login-form" method="post">
+                    <div>
+                     <div class="form-group" *ngIf="showError">
+                        <p class="text-warning align-self-center mx-auto" style="margin: 0px;"  >{{errorMessage}}</p>
+                    </div>
+                    <div class="form-group" *ngIf="showProgressBar">
+                       <p class="align-self-center mx-auto" style="margin: 0px;"  >
+                                                    <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
+                                                     <span class="sr-only">Loading...</span>
+                                          </p>              
+                    </div>
+                    </div>
+
                     <div class="form-group">
                       <input id="login-username" type="text" name="loginUsername" required="" class="input-material"   [(ngModel)]="userName"  autocomplete="off">
                       <label for="login-username" class="label-material">User Name</label>
@@ -186,6 +198,32 @@
                 </div>
               </div>
             </div>
+          </div>
+        </div>
+      </div>
+      <div class="copyrights text-center">
+        </div>
+    </div>
+
+
+
+    <div class="page"    [style.display]="(! loginUser && isIE )?'block':'none'"  >
+      <div class="container d-flex align-items-center">
+        <div class="form-holder has-shadow">
+          <div class="row">
+            <!-- Logo & Information Panel-->
+            <div class="col-lg-6">
+              <div class="info d-flex align-items-center">
+                <div class="content">
+                  <div class="row">
+                   <h1  class="alert alert-danger" role="alert">Right now we are not supporting Internet Explorer <br> Please use Google Chrome</h1>
+                  </div>
+                  <p></p>
+                </div>
+              </div>
+            </div>
+            <!-- Form Panel    -->
+          
           </div>
         </div>
       </div>

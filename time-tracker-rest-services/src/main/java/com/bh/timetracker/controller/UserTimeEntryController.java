@@ -24,7 +24,7 @@ import javax.servlet.http.HttpSession;
 
 import com.bh.timetracker.entity.CustomDataSerializer;
 import com.bh.timetracker.entity.Task;
-import com.bh.timetracker.entity.Tiket;
+import com.bh.timetracker.entity.Ticket;
 import com.bh.timetracker.entity.User;
 import com.bh.timetracker.exception.TaskException;
 import com.bh.timetracker.service.TaskServiceImpl;
@@ -56,11 +56,19 @@ public class UserTimeEntryController {
 		/* end */
 		try {
 			
-			Tiket t=task.getTiket();
-			t.setCategoryName(task.getCategory().getCategoryName());
-			t.setTiketDescription(" ");			
-			t=ticketService.getTicketOrAdd(t);
-			task.setTiket(t);
+			Ticket t=task.getTiket();
+			if( !( t.getIncidentId()==null ||  t.getIncidentId().equals(""))) {
+				t.setCategoryName(task.getCategory().getCategoryName());
+				t.setTiketDescription(" ");			
+				t=ticketService.getTicketOrAdd(t);
+				
+				task.setTiket(t);
+			} else {
+				task.setTiket(null);
+			}
+			
+			
+			
 			//task.setUser(utilityComponet.getLoginUser());
 			
 			

@@ -12,6 +12,7 @@ import { Void } from '../model/void';
 import { Task } from '../model/task';
 import { User } from '../model/user';
 import { Medium } from '../model/medium';
+import { Error } from '../model/error';
 import { Subtype } from '../model/subtype';
 import { environment  as env} from '../../environments/environment';
 const httpOptions = {
@@ -41,9 +42,9 @@ export class TimeTrackerService {
 
 
 /** GET login user */
-   getUser():any{
-     let user = JSON.parse(localStorage.getItem('currentUser1'));
-        return user.username;
+   getUser():any{   
+       console.log("current user:"+ env.currentUser);
+        return   env.currentUser;
    }
 
    login<Data>(user: User): Observable<Payload<Void>> {     
@@ -126,11 +127,11 @@ export class TimeTrackerService {
     console.log("task.user" +task.user.username);
     return this.http.post<Payload<Void>>(this.createTaskUrl, task, httpOptions).pipe(
       tap((payload: Payload<Void>) => this.log(`added task w/ id=${payload}`)),
-      catchError(this.handleError<Payload<Void>>('addHero'))
+      catchError(this.handleError<Payload<Void>>('addTask'))
     );
   }
 
-    /** DELETE: task the hero from the server */
+    /** DELETE: task the  from the server */
  deleteTask (task: Task| number): Observable<Payload<Void>> {
     const id = typeof task === 'number' ? task : task.taskId;
     const url = `${this.deleteTaskUrl}/${id}`;
@@ -172,15 +173,25 @@ export class TimeTrackerService {
 
       // TODO: better job of transforming error for user consumption
       this.log(`${operation} failed: ${error.message}`);
-
-        result=error.error;
+      console.log("error.status:" +error.status);
+       
+       if(error.status!=0){
+          result=error.error; // rror.error is reponse payload
+        }else{
+          let httpError = new Error();
+          let payload:any= new Payload<Void>()
+          httpError.errorCode=error.status;
+          payload.error=httpError;
+          result=payload;
+        }
+       
 
       // Let the app keep running by returning an empty result.
       return of(result as T);
     };
   }
 
-  /** Log a HeroService message with the MessageService */
+  /** Log a taskService message with the MessageService */
   private log(message: string) {
    console.log(`${message}`);
   }

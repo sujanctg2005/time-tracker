@@ -1,0 +1,3 @@
+select Infrastructure_Change_ID ,Support_Group_Name  from CHG_Infrastructure_Change;
+
+select Incident_Number, Assigned_Group from HPD_Help_Desk where Incident_Number='INC000000068726';

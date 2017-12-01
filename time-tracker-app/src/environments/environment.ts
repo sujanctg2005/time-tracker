@@ -7,5 +7,7 @@ export const environment = {
   production: false,
   apiURL:"http://localhost:8080",
   appContext:"/",
-  projectTitle:"EMS"
+  projectTitle:"EMS",
+  currentUser:"sujan",
+  logoutUser:"null/na"
 };

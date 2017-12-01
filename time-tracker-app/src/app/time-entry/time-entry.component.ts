@@ -8,6 +8,8 @@ import { Ticket } from '../model/ticket';
 import { Medium } from '../model/medium';
 import { Subtype } from '../model/subtype';
 import { environment  as env} from '../../environments/environment';
+import { MessageService }          from '../services/message.service';
+import { Subscription } from 'rxjs/Subscription';
 @Component({
   selector: 'time-entry-form',
   templateUrl: './time-entry.component.html',
@@ -34,11 +36,34 @@ export class TimeEntryComponent implements OnInit {
   totaHours:number=0;
   saveSuccess:boolean;
   saveFail:boolean;
+  inCompleteForm:boolean;
   deleteFail:boolean;
   showProgressBar:boolean;
+  showTaskListProgressBar:boolean=false;
   appContext=env.appContext;
-  constructor(private timeTrackerService: TimeTrackerService) { }
+  subscription: Subscription;
 
+   autoSuggestionID = ["CRQ000000019805",
+                        "CRQ000000019850",
+                        "CRQ000000019915",
+                        "CRQ000000020002",
+                        "CRQ000000020018",
+                        "CRQ000000020020",
+                        "CRQ000000020021",
+                        "CRQ000000020022",
+                        "CRQ000000020023",
+                        "CRQ000000020024",
+                        "CRQ000000020025",
+                        "CRQ000000020026",
+                        "CRQ000000020032",
+                        "CRQ000000020103",
+                        "CRQ000000020107",
+                        ];
+
+  constructor(private timeTrackerService: TimeTrackerService,private messageService: MessageService) {
+     this.subscription = this.messageService.getMessage().subscribe(message => { this.ngOnInit(); });
+   }
+  environ=env;
   resetForm(){
        this.incidentId="";
        this.hour=null;
@@ -48,65 +73,111 @@ export class TimeEntryComponent implements OnInit {
  
   }
 
+  getUser():any{   
+       console.log("current user:"+ env.currentUser);
+        return   env.currentUser;
+   }
+
+   getDummyTaskCategory():TaskCategory{
+    let taskCategory:TaskCategory= new  TaskCategory();
+      taskCategory.categoryId=-1;
+      taskCategory.categoryName="Select a Ticket Type";
+      return taskCategory;
+   }
+    getDummySubTask():Subtype{
+    let subtype:Subtype= new  Subtype();
+      subtype.subtypeId=-1;
+      subtype.subtypeName="Select a Sub Category";
+      return subtype;
+   }
+    getDummyTaskType():TaskType{
+    let taskType:TaskType= new  TaskType();
+      taskType.taskTypeId=-1;
+      taskType.taskTypeName="Select a  Category";
+      return taskType;
+   }
+   getDummyMedium():Medium{
+    let medium:Medium= new  Medium();
+      medium.mediumId=-1;
+      medium.mediumName="Select a Request Triggered via";
+      return medium;
+   }
+
   ngOnInit() {
-       //setting default value
-      this.resetForm();
-  
-     // load category list 
-      this.timeTrackerService.getCategoryList().subscribe(
-	      result => { 
+       console.log("current user.....:#"+this.getUser()+ "#")
+      if(   this.getUser()!=env.logoutUser){
 
-	      	this.categoryList = result;
-            this.selectedCategory=this.categoryList[0];
-	      },
-	       err => console.log("Error: " + err),
-	       () => console.log("DONE")
-    	);	
+         console.log("loading data.....:#"+this.getUser()+ "#")
+                     //setting default value
+                this.resetForm();
+            
+               // load category list 
+                this.timeTrackerService.getCategoryList().subscribe(
+                  result => { 
+                    
+                   let temp : TaskCategory[]= new Array(this.getDummyTaskCategory()) ;
+                
+                    this.categoryList = temp.concat(result);
 
-      //end
+                    
+                    this.selectedCategory=this.categoryList[0];
+                  },
+                   err => console.log("Error: " + err),
+                   () => console.log("DONE")
+                );  
 
-       // load category list 
-      this.timeTrackerService.getTaskTypeList().subscribe(
-        result => { 
+                //end
 
-          this.taskTypeList = result;
-            this.selectedTaskType=this.taskTypeList[0];
-        },
-         err => console.log("Error: " + err),
-         () => console.log("DONE")
-      );  
+                 // load TaskType list 
+                this.timeTrackerService.getTaskTypeList().subscribe(
+                  result => { 
+                     let temp : TaskType[]= new Array(this.getDummyTaskType()) ;
 
-      //end
+                    this.taskTypeList = temp.concat(result);
+                    this.taskTypeList.concat([this.getDummyTaskType()]);
+                      this.selectedTaskType=this.taskTypeList[0];
+                  },
+                   err => console.log("Error: " + err),
+                   () => console.log("DONE")
+                );  
 
-       // load Medium list 
-      this.timeTrackerService.getMediumList().subscribe(
-        result => { 
+                //end
 
-          this.mediumList = result;
-           this.selectedMedium=this.mediumList[0];
-        },
-         err => console.log("Error: " + err),
-         () => console.log("DONE")
-      );  
+                 // load Medium list 
+                this.timeTrackerService.getMediumList().subscribe(
+                  result => { 
+                   let temp : Medium[]= new Array(this.getDummyMedium()) ;
+                    this.mediumList = temp.concat(result);
+                     this.mediumList.concat([this.getDummyMedium()]);                   
+                     this.selectedMedium=this.mediumList[0];
+                  },
+                   err => console.log("Error: " + err),
+                   () => console.log("DONE")
+                );  
 
-      //end
+                //end
 
-     // load Subtype list 
-      this.timeTrackerService.getSubtypeList().subscribe(
-        result => { 
-          this.subtypeList = result;
-           this.selectedSubtype=this.subtypeList[0];
-        },
-         err => console.log("Error: " + err),
-         () => console.log("DONE")
-      );  
+               // load Subtype list 
+                this.timeTrackerService.getSubtypeList().subscribe(
+                  result => { 
+                     let temp : Subtype[]= new Array(this.getDummySubTask()) ;
+                    this.subtypeList  = temp.concat(result);
+                      this.subtypeList.concat([this.getDummySubTask()]);
+                     this.selectedSubtype=this.subtypeList[0];
+                  },
+                   err => console.log("Error: " + err),
+                   () => console.log("DONE")
+                );  
 
-      //end
+                //end
 
 
-      //load all user task by date
-      this.reloadTaskList();
+                //load all user task by date
+                this.reloadTaskList();
 
+      }
+
+     
 
   }
    onChangeTaskDate(){
@@ -175,6 +246,7 @@ export class TimeEntryComponent implements OnInit {
         this.saveSuccess = false;
         this.saveFail = false;
         this.deleteFail = false;
+        this.inCompleteForm=false;
      }
   
      showSuccessAlert(){
@@ -195,6 +267,13 @@ export class TimeEntryComponent implements OnInit {
           this.dismissAlert();
        }.bind(this), 5000);
      }
+      
+      showIncompleteFormAlert(){
+        this.inCompleteForm = true;         
+        setTimeout(function() {
+          this.dismissAlert();
+       }.bind(this), 3000);
+     }
 
       showProgress(){
         this.showProgressBar = true;  
@@ -204,19 +283,36 @@ export class TimeEntryComponent implements OnInit {
      }
      onClickAdd() { 
        let task:Task=this.getTask();
-     
-       if (  ( ! task.tiket ===null   || task.tiket.incidentId===null ) ||  (  task.hours ===null || task.hours===0 ) ){
-           alert("Fill the form");
+
+       if(task.medium.mediumId===-1 || task.category.categoryId===-1 || task.subtype.subtypeId===-1 || task.medium.mediumId===-1){
+          //alert("Fill the form");
+           this.showIncompleteFormAlert();
           return;
        }
-       
+     
+       if (  task.hours ===null || task.hours===0  ) {
+           //alert("Fill the form");
+           this.showIncompleteFormAlert();
+          return;
+       }
+       if(task.tiket.incidentId===null || task.tiket.incidentId===""|| task.tiket.incidentId.trim()===""){
+        console.log("task.category.categoryName :" +task.category.categoryName + " val"+task.category.categoryName.toLowerCase().indexOf("other"));
+           if(task.category.categoryName.toLowerCase().indexOf("other")===-1){
+               this.showIncompleteFormAlert();
+                  return;
+           }
+
+       }
+        
+
+
       // let jsonString = JSON.stringify(task);
        this.showProgress();
        
       this.timeTrackerService.addTask(task).subscribe(
         result => { 
                     this.hideProgress();
-                    if( result.status==null){
+                    if( result.error==null){
                        console.log("Task added successfully");
                        
                          this.showSuccessAlert();
@@ -238,25 +334,26 @@ export class TimeEntryComponent implements OnInit {
   
      deleteTask(task:Task){
           console.log("Delete task id: "+task.taskId);        
-
+         this.showTaskListProgressBar=true;
           this.timeTrackerService.deleteTask(task).subscribe(
           result => { 
-                if( result.status==null){
+                if( result.error==null){
                    console.log("Task delete successfully");
                     this.reloadTaskList();
                  }else{
+                     this.showTaskListProgressBar=false;
                      this.showDeleteFailAlert();
                    console.log("Failed to delete the task, status code:"+result.status);
                  }
            
-          }, err => console.log("Error: " + err),() => console.log("DONE")
+          }, err => console.log("Error: " + err),() => {console.log("DONE"); }
         );  
 
           
      }
 
       getTaskListByUser(taskdate:string){        
-
+            this.showTaskListProgressBar=true;
             this.timeTrackerService.getTaskList(taskdate).subscribe(
             result => { 
 
@@ -272,7 +369,7 @@ export class TimeEntryComponent implements OnInit {
 
             },
              err => console.log("Error: " + err),
-             () => console.log("DONE")
+             () => { console.log("DONE"); this.showTaskListProgressBar=false;}
           );  
       }
      getTask():Task{

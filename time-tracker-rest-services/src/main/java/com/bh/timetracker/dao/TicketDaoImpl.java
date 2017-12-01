@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.bh.timetracker.entity.Tiket;
+import com.bh.timetracker.entity.Ticket;
 
 @Transactional(propagation = Propagation.REQUIRED)
 @Repository
@@ -18,12 +18,12 @@ public class TicketDaoImpl {
 	private EntityManager entityManager;
 	private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
-	public Tiket getTicker(Tiket tiket) {
-		logger.info("executing the query IncidentId:" + tiket.getIncidentId());
-		String sql = "FROM Tiket AS TIC WHERE TIC.incidentId=:incidentId and TIC.categoryName=:categoryName";
-		Tiket t = null;
+	public Ticket getTicker(Ticket Ticket) {
+		logger.info("executing the query IncidentId:" + Ticket.getIncidentId());
+		String sql = "FROM Ticket AS TIC WHERE TIC.incidentId=:incidentId and TIC.categoryName=:categoryName";
+		Ticket t = null;
 		try {
-			t = entityManager.createQuery(sql, Tiket.class).setParameter("incidentId", tiket.getIncidentId()).setParameter("categoryName", tiket.getCategoryName()).getSingleResult();
+			t = entityManager.createQuery(sql, Ticket.class).setParameter("incidentId", Ticket.getIncidentId()).setParameter("categoryName", Ticket.getCategoryName()).getSingleResult();
 		} catch (Exception e) {
 			logger.info("inciden not found");
 		}
@@ -32,11 +32,11 @@ public class TicketDaoImpl {
 		return t;
 	}
 
-	public Tiket save(Tiket tiket) {
+	public Ticket save(Ticket Ticket) {
 		logger.info("adding ticket in db ");
-		entityManager.persist(tiket);
+		entityManager.persist(Ticket);
 
 		logger.info("completed adding ticket in db");
-		return tiket;
+		return Ticket;
 	}
 }

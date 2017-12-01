@@ -26,6 +26,8 @@
                                         <p class="text-warning align-self-center mx-auto" style="margin: 0px;"   *ngIf="saveFail">Fail to Add Task</p>
                                         <p class="text-warning align-self-center mx-auto" style="margin: 0px;"   *ngIf="deleteFail">Fail to Delete Task</p>
                                          
+                                         <p class="text-warning align-self-center mx-auto" style="margin: 0px;"   *ngIf="inCompleteForm">Please Fill the Form</p>
+
 
                                           <p class="align-self-center mx-auto" style="margin: 0px;"  *ngIf="showProgressBar" >
                                                     <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
@@ -42,7 +44,7 @@
                                             <div class="row">
                                                 <div class="col-6">
                                                     <div class="form-group">
-                                                        <label class="form-control-label">Category*</label>
+                                                        <label class="form-control-label">Ticket Type <span style="color:red">*</span></label>
                                                         <div>
                                                              <select name="catgoryList" class="form-control" (input)="onSelectCatgoryList($event.target.value)"  [(ngModel)]="selectedCategory.categoryId"  >
                                                                 <option *ngFor="let category of categoryList" [value]="category.categoryId">{{category.categoryName}}</option>
@@ -50,9 +52,10 @@
                                                         </div>                                                     
                                                     </div>
                                                     <div class="form-group">
-                                                        <label class="form-control-label">Technical Category*</label>
+                                                        <label class="form-control-label">Technical Category<span style="color:red">*</span></label>
                                                         <div>
                                                           <select name="taskTypeList" class="form-control" (input)="onSelecttaskTypeList($event.target.value)"  [(ngModel)]="selectedTaskType.taskTypeId">
+                                                                
                                                                 <option *ngFor="let taskType of taskTypeList" [value]="taskType.taskTypeId">{{taskType.taskTypeName}}</option>
                                                             </select> 
                                                         </div>
@@ -61,40 +64,63 @@
                                                    
 
                                                      <div class="form-group">
-                                                        <label class="form-control-label">Sub Technical Category*</label>
+                                                        <label class="form-control-label">Sub Technical Category<span style="color:red">*</span></label>
                                                         <div>
                                                           <select name="subtypeList1" class="form-control"   [(ngModel)]="selectedSubtype.subtypeId"   (input)="onSelectSubtypeList($event.target.value)">
                                                                 <option *ngFor="let subtype of subtypeList" [value]="subtype.subtypeId">{{subtype.subtypeName}}</option>
                                                             </select> 
                                                         </div>
                                                     </div>
-                                                </div>
-                                                <div class="col-6">
-                                                    <div class="form-group">
-                                                        <label class="form-control-label">Medium</label>
+                                                    
+                                                     <div class="form-group">
+                                                        <label class="form-control-label">Request Triggered via</label>
                                                         <div>
                                                           <select name="getMediumList1" class="form-control"   [(ngModel)]="selectedMedium.mediumId" (input)="onSelectMediumList($event.target.value)"   >
+                                                                
                                                                 <option *ngFor="let medium of mediumList" [value]="medium.mediumId">{{medium.mediumName}}</option>
                                                             </select> 
                                                         </div>
                                                     </div>
 
+                                                </div>
+                                                <div class="col-6">
+                                                   
+
                                                     <div class="form-group">
                                                         <label class="form-control-label">Ticket ID</label>
-                                                        <input type="text" placeholder="Ticket ID" required class="form-control"  name="incidentId" [(ngModel)]="incidentId" autocomplete="off">
+                                                        <input type="text" placeholder="Ticket ID" required class="form-control" onInput="checkLength(40,this)" name="incidentId" [(ngModel)]="incidentId" autocomplete="off"   ng2-auto-complete  [source]="autoSuggestionID">
                                                     </div>
                                                     <div class="form-group">
-                                                        <label class="form-control-label">Mins*</label>
-                                                        <input type="number" placeholder="Mins" step=".5" required class="form-control"  name="hour" min="0"  [(ngModel)]="hour" autocomplete="off">
+                                                        <label class="form-control-label">Activity Duration/Time (Mins)<span style="color:red">*</span></label>
+                                                        <input type="number" placeholder="Mins" step=".5" onKeyPress="return check(event,value)" onInput="checkLength(3,this)"  class="form-control"  name="hour" min="0"  max="999" [(ngModel)]="hour" autocomplete="off"    required minlength="0" >
+                                                    </div> 
+
+                                                    <div class="form-group">
+                                                        <label class="form-control-label">Comments</label>
+                                                        <input type="text" placeholder="Comments"   class="form-control" onInput="checkLength(100,this)"   name="comments" [(ngModel)]="comments" autocomplete="off">
                                                     </div>
+
+                                                      <!--   <div *ngIf="minlength.invalid && (name.dirty || name.touched)"
+                                                                     class="alert alert-danger">
+
+                                                                  <div *ngIf="name.errors.required">
+                                                                    Name is required.
+                                                                  </div>
+                                                                  <div *ngIf="name.errors.minlength">
+                                                                    Name must be at least 4 characters long.
+                                                                  </div>
+                                                                  <div *ngIf="name.errors.forbiddenName">
+                                                                    Name cannot be Bob.
+                                                                  </div>
+
+                                                       </div> -->
+
+                                                  
                                                     
                                                 </div>
 
                                                  <div class="col-12">
-                                                    <div class="form-group">
-                                                        <label class="form-control-label">Comments</label>
-                                                        <input type="text" placeholder="Comments"   class="form-control"  name="comments" [(ngModel)]="comments" autocomplete="off">
-                                                    </div>
+                                                    
                                                  </div>
 
                                             </div>
@@ -103,7 +129,7 @@
                                                     <input type="submit" value="Add"  name="Add" class="btn btn-primary"   (click)="onClickAdd()">
                                                 </div>
                                                 <div class="col-md-auto">
-                                                    <input type="submit" value="Clear" class="btn btn-secondary">
+                                                    <input type="submit" value="Clear" class="btn btn-secondary"(click)="resetForm()" >
                                                 </div>
 
                                             </div>
@@ -117,6 +143,16 @@
                         </div>
                     </div>
                 </section>
+<div class="row">
+     <div class="col-12 col-md-9">
+            <p class="align-self-center mx-auto" style="margin: 0px;"  *ngIf="showTaskListProgressBar" >
+                                                    <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
+                                                     <span class="sr-only">Loading...</span>
+                </p>
+     </div>
+</div>
+
+              
 
                 <!-- Projects Section-->
                 <section class="projects no-padding-top">
@@ -135,7 +171,7 @@
                                                 </div>
                                             </div>
                                             <div class="project-date">
-                                                    <span class="hidden-sm-down">{{task.tiket.incidentId}} </span>
+                                                    <span class="hidden-sm-down">{{task.tiket?.incidentId}} </span>
                                                  
                                             </div>
                                         </div>
@@ -247,8 +283,8 @@
                                 <div class="card-body" >
                                     <h3>Work Hours</h3><small>Total work on {{taskDate}}</small>
                                     <div class="chart text-center">
-                                        <div class="text"><strong>{{totaHours/60 | number:'2.1-2'}}</strong>
-                                            <br><span>Hours</span>
+                                        <div class="text"><strong>{{totaHours}}</strong>
+                                            <br><span>Mins</span>
                                         </div>
                                         <canvas id="pieChart"></canvas>
                                     </div>
