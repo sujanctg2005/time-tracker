@@ -34,6 +34,7 @@ export class TimeTrackerService {
   private allTasksByUserV1Url = `${this.apiHOST}/timeEntry/allTasksByUserV1`; 
   private deleteTaskUrl = `${this.apiHOST}/timeEntry/deleteTask`; 
   private  loginUrl = `${this.apiHOST}/auth/login`; 
+  //http://localhost:8080/ticket/validateTicket/TICKET,INCIDENT_ID,ASSIGNED_GROUP/CRQ000000019915
   constructor(
     private http: HttpClient) { 
 

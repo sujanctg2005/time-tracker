@@ -3,7 +3,7 @@ package com.bh.timetracker.controller;
 
 import java.util.UUID;
 
-import javax.servlet.http.HttpSession;
+
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -61,6 +61,7 @@ public class LoginController {
 			/* end */
 
 		} catch (Exception e) {
+			logger.error("fail to login", e);
 			payload = new Payload<Void>(new TaskException("fail to login "));
 			responseEntity = new ResponseEntity<Payload<Void>>(payload, HttpStatus.BAD_REQUEST);
 			return responseEntity;

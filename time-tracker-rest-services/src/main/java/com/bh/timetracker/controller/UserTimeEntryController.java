@@ -85,6 +85,7 @@ public class UserTimeEntryController {
 			/* end */
 
 		} catch (Exception e) {
+			logger.error("fail to login", e);
 			payload = new Payload<Void>(new TaskException("fail to create task"));
 			responseEntity = new ResponseEntity<Payload<Void>>(payload, HttpStatus.CONFLICT);
 			return responseEntity;

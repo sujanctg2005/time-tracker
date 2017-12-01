@@ -109,7 +109,7 @@ public class TaskDaoImpl {
 	@Transactional(propagation = Propagation.REQUIRED, readOnly=true)
 	public Task getTaskV1(Task task) {
 		logger.info("loading task info");
-		String sql="SELECT t FROM Task t JOIN FETCH t.Category c JOIN FETCH t.TaskType tp  JOIN FETCH  t.Tiket tk JOIN FETCH t.User u  WHERE t.taskId=:taskId";		
+		String sql="SELECT t FROM Task t JOIN FETCH t.Category c JOIN FETCH t.TaskType tp  LEFT JOIN  FETCH  t.ticket  tk JOIN FETCH t.User u  WHERE t.taskId=:taskId";		
 		Task t = entityManager.createQuery(sql, Task.class).setParameter("taskId", task.getTaskId()).getSingleResult();
 		logger.info("completed oading task info");
 		return t;
