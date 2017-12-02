@@ -1,0 +1,1 @@
+imp file=emp.dmp fromuser=bi_report touser=bi_report
