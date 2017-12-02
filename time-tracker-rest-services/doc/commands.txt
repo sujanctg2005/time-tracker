@@ -1,5 +1,5 @@
 ﻿# run service project
-java -jar ./target/time-tracker-rest-services-0.0.1-SNAPSHOT.jar --spring.config.location=classpath:file:./app.properties
+java -jar ./target/time-tracker-rest-services-0.0.1-SNAPSHOT.jar --spring.config.location=classpath:file:./application.properties
 # build project for prod
 ng build --prod --build-optimizer --base-href=timetracker
 # start node server for dev
@@ -11,7 +11,16 @@ netsh interface portproxy add v4tov4 listenport=8080 listenaddress=10.253.49.163
 
 netsh advfirewall firewall add rule name=”RDP_8080” protocol=TCP dir=in localip=10.253.49.163  localport=8080 action=allow
 
-
+#build service module
+mvn clean install -DskipTests
 
 #build
 ng build --prod --build-optimizer
+
+#db export
+expdp time_tracker/tracker@xe schemas=time_tracker directory=TEST_DIR dumpfile=time_tracker.dmp logfile=expdpStime_tracker.log
+
+
+
+# tmo vm
+http://10.253.49.163:8080/auth/login/sujan/123

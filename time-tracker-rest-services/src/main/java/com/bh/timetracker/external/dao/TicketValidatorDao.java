@@ -79,8 +79,10 @@ public class TicketValidatorDao {
 				data[1]= resultSet.getString(2);
 					
 			}
-			
+			resultSet.close();
+			pstmt.close();
 			connection.close();
+			
 		} catch (Exception e) {			
 			logger.error("Fail to validate tiket", e);
 		}finally {

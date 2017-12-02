@@ -16,3 +16,18 @@ ALTER TABLE TASKS
 ALTER TABLE TASKS
 ADD CONSTRAINT FK_MEDIUM_id
 FOREIGN KEY (MEDIUM_ID) REFERENCES MEDIUM(MEDIUM_ID);
+
+
+SQL> conn sys as sysdba
+Enter password:
+Connected.
+SQL> create user time_tracker identified by tracker;
+
+User created.
+
+SQL> grant resource, dba to time_tracker;
+
+Grant succeeded.
+
+SQL> conn  time_tracker/tracker;
+Connected.
