@@ -25,3 +25,7 @@ build/
 node_modules/
 typings/
 time-tracker-app/src/environments/environment.prod.ts
+time-tracker-rest-services/db/itsm-query.txt
+time-tracker-rest-services/db/ericsson/
+time-tracker-rest-services/doc/Database Details (2).xlsx
+time-tracker-rest-services/src/main/java/com/bh/timetracker/Test.java

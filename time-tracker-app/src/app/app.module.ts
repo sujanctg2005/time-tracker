@@ -13,6 +13,7 @@ import { TimeEntryComponent }   from './time-entry/time-entry.component';
 import { TimeTrackerService }          from './services/timetracker.service';
 import { MessageService }          from './services/message.service';
 import { Ng2AutoCompleteModule } from 'ng2-auto-complete';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 @NgModule({
   imports: [
     BrowserModule,
@@ -21,7 +22,8 @@ import { Ng2AutoCompleteModule } from 'ng2-auto-complete';
     HttpClientModule,
     MomentModule,
     Ng2AutoCompleteModule,
-    Ng2DeviceDetectorModule.forRoot()
+    Ng2DeviceDetectorModule.forRoot(),
+    NgbModule.forRoot()
   ],
   declarations: [
     AppComponent,

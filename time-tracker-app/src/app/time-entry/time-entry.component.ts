@@ -10,6 +10,8 @@ import { Subtype } from '../model/subtype';
 import { environment  as env} from '../../environments/environment';
 import { MessageService }          from '../services/message.service';
 import { Subscription } from 'rxjs/Subscription';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 @Component({
   selector: 'time-entry-form',
   templateUrl: './time-entry.component.html',
@@ -48,6 +50,7 @@ export class TimeEntryComponent implements OnInit {
    showSuccess:boolean=false;
    alertMessage:string="";
    ticketIDPlaceHolder:string="Ticket ID";
+   closeResult: string;
    /*autoSuggestionID = ["CRQ000000019805",
                         "CRQ000000019850",
                         "CRQ000000019915",
@@ -65,10 +68,70 @@ export class TimeEntryComponent implements OnInit {
                         "CRQ000000020107",
                         ];
 */
-  constructor(private timeTrackerService: TimeTrackerService,private messageService: MessageService) {
+  constructor(private timeTrackerService: TimeTrackerService,
+    private messageService: MessageService,
+    private modalService: NgbModal) {
      this.subscription = this.messageService.getMessage().subscribe(message => { this.ngOnInit(); });
    }
   environ=env;
+
+
+
+/*confirmation model */
+open(content, ) {
+    this.modalService.open(content).result.then((result) => {
+
+
+      this.closeResult = `Closed with: ${result}`;
+    }, (reason) => {
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });
+  }
+
+  private getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return 'by clicking on a backdrop';
+    } else {
+      return  `with: ${reason}`;
+    }
+  }
+
+/*confirmation model end */
+
+
+  deleteTask(task:Task,content:any){
+          
+          this.modalService.open(content).result.then((result) => {
+               console.log("Delete task id: "+task.taskId +" result: "+result);    
+                if (result ==='Yes') {
+                    this.showTaskListProgressBar=true;
+                    this.timeTrackerService.deleteTask(task).subscribe(
+                    result => { 
+                          if( result.error==null){
+                             console.log("Task deleted successfully");
+                              this.reloadTaskList();
+                              this.showValidAlert("Task deleted successfully");
+                           }else{
+                               this.showTaskListProgressBar=false;
+                               this.showDeleteFailAlert();
+                             console.log("Failed to delete the task, status code:"+result.status);
+                           }
+                     
+                    }, err => console.log("Error: " + err),() => {console.log("DONE"); }
+                  );  
+                }
+                 
+             
+
+           
+          }, (reason) => {
+                 ///   this.closeResult = `Dismissed `;
+          });
+     }
+
+
   resetForm(){
        this.incidentId="";
        this.hour=null;
@@ -411,26 +474,7 @@ showErrorAlert(error:string){
      // console.log( `click added : ${jsonString}` );
     } 
   
-     deleteTask(task:Task){
-          console.log("Delete task id: "+task.taskId);        
-         this.showTaskListProgressBar=true;
-          this.timeTrackerService.deleteTask(task).subscribe(
-          result => { 
-                if( result.error==null){
-                   console.log("Task deleted successfully");
-                    this.reloadTaskList();
-                    this.showValidAlert("Task deleted successfully");
-                 }else{
-                     this.showTaskListProgressBar=false;
-                     this.showDeleteFailAlert();
-                   console.log("Failed to delete the task, status code:"+result.status);
-                 }
-           
-          }, err => console.log("Error: " + err),() => {console.log("DONE"); }
-        );  
-
-          
-     }
+   
 
       getTaskListByUser(taskdate:string){        
             this.showTaskListProgressBar=true;

@@ -144,6 +144,30 @@
                         </div>
                     </div>
                 </section>
+
+<ng-template #content let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title">Please confirm</h4>
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <p>Do you want to delete?</p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-primary" (click)="c('Yes')">Yes</button>
+    <button type="button" class="btn btn-outline-secondary" (click)="c('No')">No</button>
+  </div>
+</ng-template>
+
+<!-- <button class="btn btn-lg btn-outline-primary" (click)="open(content)">Launch demo modal</button>
+<hr>
+
+<pre>{{closeResult}}</pre> -->
+
+
+
 <div class="row">
      <div class="col-12 col-md-9">
             <p class="align-self-center mx-auto" style="margin: 0px;"  *ngIf="showTaskListProgressBar" >
@@ -185,7 +209,7 @@
                                                 </div>
                                             </div>
                                             <!-- <i class="fa fa-times" aria-hidden="true"  style="cursor:pointer;" (click)="deleteTask(task)"></i> -->
-                                            <button type="button" class="close" aria-label="Close" (click)="deleteTask(task)">
+                                            <button type="button" class="close" aria-label="Close" (click)="deleteTask(task,content)">
                                               <span aria-hidden="true">&times;</span>
                                             </button>
                                         </div>
