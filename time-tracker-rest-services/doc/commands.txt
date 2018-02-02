@@ -20,7 +20,8 @@ ng build --prod --build-optimizer
 #db export
 expdp time_tracker/tracker@xe schemas=time_tracker directory=TEST_DIR dumpfile=time_tracker.dmp logfile=expdpStime_tracker.log
 
-
+#copy file to db container
+ scp -P 49160   ./db/time_tracker_2017-12-02_0517.dmp root@192.168.0.30:~/
 
 # tmo vm
 http://10.253.49.163:8080/auth/login/sujan/123
