@@ -30,6 +30,7 @@ public class MediumDao {
 		String sql = "FROM Medium AS m";
 		List<Medium> list = entityManager.createQuery(sql, Medium.class).getResultList();
 		logger.info("completed the  query");
+
 		return list;
 	}
 
